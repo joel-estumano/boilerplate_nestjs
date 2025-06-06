@@ -10,17 +10,21 @@ Sinta-se à vontade para enviar sugestões, melhorias ou perguntas! 🚀
 
 ### 📌 Introdução
 
-Este projeto é um boilerplate NestJS, criado para facilitar a implementação de APIs REST robustas e escaláveis. Ele fornece uma estrutura pronta para CRUD de produtos 🛒, incluindo integração com MySQL 🗄️, Docker 🐳, e Swagger 📜 para documentação da API.
+Este projeto foi criado para exemplificar a implementação de APIs REST, oferecendo uma estrutura pronta para CRUD de empresas e produtos, com integração a banco de dados, validação de dados e documentação automatizada.
+Empresas podem ser cadastradas com informações como nome e logo, enquanto produtos são vinculados a empresas específicas, garantindo um relacionamento claro entre essas entidades.
 
-✨ Além disso, este boilerplate já conta com validação automática de DTOs ✅, garantindo que os dados recebidos nas requisições sigam os formatos esperados, evitando inconsistências no sistema.
+### 🏢 Gerenciamento de Empresas e Produtos
 
-⚠️ Também foi configurado um filtro global de erros ❌, que intercepta exceções e retorna respostas padronizadas, tornando o gerenciamento de erros mais eficiente e melhorando a experiência do usuário.
+O sistema permite que cada empresa tenha múltiplos produtos associados a ela, criando uma estrutura organizada para armazenar e gerenciar informações comerciais.
+Ao criar um produto, é necessário informar a empresa à qual ele pertence, garantindo que a gestão dos produtos seja feita de forma correta e consistente.
+Essa abordagem melhora a integridade dos dados e facilita a escalabilidade da aplicação.
 
 ### 🎯 Objetivo do Projeto
 
-✅ Criar uma base sólida para projetos NestJS com boas práticas.
-✅ Facilitar a implementação de operações CRUD (Create, Read, Update, Delete) para produtos.
-✅ Oferecer uma configuração inicial pronta para produção, incluindo banco de dados, autenticação e documentação API.
+✅ Construir uma base sólida para projetos NestJS, seguindo boas práticas de desenvolvimento.
+✅ Oferecer um projeto pronto para escalabilidade, com uma arquitetura organizada e modular.
+✅ Implementar um exemplo funcional, incluindo operações CRUD (Create, Read, Update, Delete) para empresas e produtos.
+✅ Providenciar uma infraestrutura inicial preparada para produção, integrando banco de dados, autenticação e documentação via Swagger.
 
 🛠️ Tecnologias Utilizadas
 

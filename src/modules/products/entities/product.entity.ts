@@ -1,7 +1,6 @@
 import { BaseEntity } from '@common/entities/base.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
-export type ProductKeys = keyof Product;
+import { Company } from 'src/modules/companies/entities/company.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('products')
 export class Product extends BaseEntity {
@@ -19,4 +18,7 @@ export class Product extends BaseEntity {
 
     @Column({ nullable: false })
     price: number;
+
+    @ManyToOne(() => Company, company => company.products, { nullable: false, onDelete: 'CASCADE' })
+    company: Company;
 }

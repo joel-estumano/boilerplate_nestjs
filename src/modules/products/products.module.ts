@@ -5,6 +5,7 @@ import { Product } from './entities/product.entity';
 import { DATA_SOURCE, PRODUCT_REPOSITORY } from '@common/constants/repository.tokens';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
+import { CompaniesModule } from '../companies/companies.module';
 
 const productProviders = [
     {
@@ -15,7 +16,7 @@ const productProviders = [
 ];
 
 @Module({
-    imports: [DatabaseModule],
+    imports: [DatabaseModule, CompaniesModule],
     controllers: [ProductsController],
     providers: [ProductsService, ...productProviders],
 })

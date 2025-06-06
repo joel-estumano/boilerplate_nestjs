@@ -16,15 +16,15 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductsQueryPaginateDto } from './dto/products-query-paginate.dto';
 import { ProductsOutputPaginateDto } from './dto/products-output-paginate.dto';
 
-@Controller('products')
+@Controller('companies/:companyId/products')
 @ApiTags('Products')
 export class ProductsController {
     constructor(private readonly productsService: ProductsService) {}
 
     @Post()
     @ApiOperation({
-        summary: 'Create a new product',
-        description: 'This endpoint creates a new product using the provided data.',
+        summary: 'Create a new product for a company',
+        description: 'Creates a new product and associates it with a specific company.',
     })
     @ApiCreatedResponse({
         description: 'Product created successfully.',
@@ -33,14 +33,15 @@ export class ProductsController {
     @ApiBadRequestResponse({
         description: 'Invalid input data. Please verify the provided information.',
     })
-    create(@Body() createProductDto: CreateProductDto) {
-        return this.productsService.create(createProductDto);
+    @ApiParam({ name: 'companyId', required: true, description: 'Company ID' })
+    create(@Param('companyId') companyId: string, @Body() createProductDto: CreateProductDto) {
+        return this.productsService.create(companyId, createProductDto);
     }
 
     @Get('paginate')
     @ApiOperation({
-        summary: 'Retrieve paginated list of products',
-        description: 'Fetches products with optional pagination and search query.',
+        summary: 'Retrieve paginated products of a company',
+        description: 'Fetches products for a given company with optional pagination and search query.',
     })
     @ApiOkResponse({
         description: 'Successfully retrieved paginated list of products.',
@@ -49,14 +50,15 @@ export class ProductsController {
     @ApiBadRequestResponse({
         description: 'Invalid query parameters. Please verify the input.',
     })
-    async paginate(@Query() dto: ProductsQueryPaginateDto): Promise<ProductsOutputPaginateDto> {
-        return await this.productsService.paginate(dto);
+    @ApiParam({ name: 'companyId', required: true, description: 'Company ID' })
+    async paginate(@Param('companyId') companyId: string, @Query() dto: ProductsQueryPaginateDto): Promise<ProductsOutputPaginateDto> {
+        return await this.productsService.paginate(companyId, dto);
     }
 
     @Get(':id')
     @ApiOperation({
-        summary: 'Get product details by ID',
-        description: 'Retrieves the details of a specific product based on the provided ID.',
+        summary: 'Get product details by ID for a company',
+        description: 'Retrieves product details for a given company and product ID.',
     })
     @ApiOkResponse({
         description: 'Product successfully recovered.',
@@ -66,15 +68,16 @@ export class ProductsController {
         description: 'Invalid input data. Please verify the provided information.',
     })
     @ApiNotFoundResponse()
+    @ApiParam({ name: 'companyId', required: true, description: 'Company ID' })
     @ApiParam({ name: 'id', required: true, description: 'Product ID' })
-    findOne(@Param('id') id: string) {
-        return this.productsService.findOne(+id);
+    findOne(@Param('companyId') companyId: string, @Param('id') id: string) {
+        return this.productsService.findOne(companyId, +id);
     }
 
     @Patch(':id')
     @ApiOperation({
-        summary: 'Update a product',
-        description: 'Updates product information based on the given ID.',
+        summary: 'Update a product for a company',
+        description: 'Updates product information for a given company and product ID.',
     })
     @ApiOkResponse({
         description: 'Product updated successfully.',
@@ -84,15 +87,16 @@ export class ProductsController {
         description: 'Invalid input data. Please verify the provided information.',
     })
     @ApiNotFoundResponse()
+    @ApiParam({ name: 'companyId', required: true, description: 'Company ID' })
     @ApiParam({ name: 'id', required: true, description: 'Product ID' })
-    update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-        return this.productsService.update(+id, updateProductDto);
+    update(@Param('companyId') companyId: string, @Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
+        return this.productsService.update(companyId, +id, updateProductDto);
     }
 
     @Delete(':id')
     @ApiOperation({
-        summary: 'Delete a product',
-        description: 'Removes a product from the database using the provided ID.',
+        summary: 'Delete a product from a company',
+        description: 'Removes a product from a given company using the provided ID.',
     })
     @ApiNoContentResponse({
         description: 'Product deleted successfully.',
@@ -101,8 +105,9 @@ export class ProductsController {
         description: 'Invalid input data. Please verify the provided information.',
     })
     @ApiNotFoundResponse()
+    @ApiParam({ name: 'companyId', required: true, description: 'Company ID' })
     @ApiParam({ name: 'id', required: true, description: 'Product ID' })
-    remove(@Param('id') id: string) {
-        return this.productsService.remove(+id);
+    remove(@Param('companyId') companyId: string, @Param('id') id: string) {
+        return this.productsService.remove(companyId, +id);
     }
 }
